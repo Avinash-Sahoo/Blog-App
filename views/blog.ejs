@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Home Page</title>
+  </head>
+  <body>
+
+    <%- include("./partials/nav") %>
+  
+    <div class="container d-flex flex-column align-items-center mt-4">
+
+      <img src="<%= blog.coverImageUrl %>" width="500px">
+        <h1 class="mt-4"><%= blog.title %></h1>
+        
+      </div>
+      <div class="container">
+        
+        <pre class="text-center mt-5"><%= blog.body %></pre>
+      </div>
+
+      <div class="container mt-4">
+        <h1>Comment (<%= comments.length %>)</h1>
+        <form action="/blog/comment/<%= blog._id %>" method="post">
+          <div class="mb-3">
+              <input type="text" class="form-control mt-2" placeholder="Enter Your Comment" id="comment" name="comment">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+      </div>
+       
+    <div class="container mt-3">
+
+      <% comments.forEach(comment => { %>
+
+       <div class="container pt-3">
+          <img src="<%= comment.createdBy.profilePhoto %>" width="30px">
+          <span class="ms-1"><%= comment.createdBy.fullName %></span>
+          <div class="container ps-5">
+            <h6><%= comment.content %></h6>
+          </div>
+      </div>
+
+      <% }) %>
+
+    </div>
+
+      
+ 
+    
+    <%- include("./partials/script") %>
+  </body>
+
+</html>
